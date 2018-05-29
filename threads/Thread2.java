@@ -25,10 +25,16 @@ public class Thread2 extends Thread{
     public void run(){
         
        while(true){
+    	   
+    	   if(CR.stopcount <= 0) {
+    		   brp.reset();
+              	System.out.println ("Thread2 goes die\n");
+              	break;
+              } 
 
            System.out.println("Thread2 stands before CyclicBarrier and wait full sync with Thread1");
             try {
-                brp.await();
+               if (CR.stopcount > 0) brp.await();
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             } catch (BrokenBarrierException ex) {
@@ -36,15 +42,9 @@ public class Thread2 extends Thread{
             }
             System.out.println("Thread2 works after full sync with Thread1");
             
-            if(CR.stopcount == 0) {
-            	
-               	System.out.println ("Thread2 goes die\n");
-               	break;
-               } 
-            
             CR.consume(); 
             
        }
-       brp.reset();
+       
     }
 }

@@ -16,7 +16,7 @@ public class Thread5 extends Thread{
     public void run(){
         while(true){
         	
-        	if(CR.stopcount == 0) {
+        	if(CR.stopcount <= 0) {
             	System.out.println ("Thread5 goes die\n");
             	break;
             } 

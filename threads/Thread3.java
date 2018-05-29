@@ -30,22 +30,27 @@ public class Thread3 extends Thread{
     public void run(){
         int i = 87;
         while(true){
-        	if(cr2.stopcount == 0) {
+        	if(cr2.stopcount <= 0) {
         		sem2.release();
         		cb1.reset();
         		System.out.println ("Tread3 goes die\n");
             	break;
             } 
+        	/*if(cr2.stopcount != 0) {
+        		sem2.release();
+        		cb1.reset();
+            } */
         	
-            System.out.println("Thread3 wait sync with Thread6 by CyclicBarrier");
+            System.out.println("Thread3 wait sync with Thread6 by CyclicBarrier (cb1)");
             try {
-                cb1.await();
+                if (cr2.stopcount >0)
+                	cb1.await();
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             } catch (BrokenBarrierException ex) {
                 System.out.println(ex.getMessage());
             }
-            System.out.println("Thread3 work after sync with Thread6 by CyclicBarrier");
+            System.out.println("Thread3 work after sync with Thread6 by CyclicBarrier (cb1)");
                        
             System.out.println("Thread3 lock mutex and started working with CR2");
             
@@ -75,8 +80,6 @@ public class Thread3 extends Thread{
                 System.out.println(ex.getMessage());
             }
             System.out.println("Thread3 work after sync with Thread6 by Semaphore");
-            
-        	
         }
         
         
