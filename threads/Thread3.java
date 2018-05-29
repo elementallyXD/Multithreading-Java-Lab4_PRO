@@ -53,7 +53,8 @@ public class Thread3 extends Thread{
             cr2.val_5 = (2*i+3)*(i*i-7);
             cr2.val_6 = (i*7)/(3*i*i);
             cr2.val_7 = false;
-            cr2.val_8 = true;            
+            cr2.val_8 = true;     
+            cr2.stopcount--;
             
             mutex.unlock();
             
@@ -67,6 +68,11 @@ public class Thread3 extends Thread{
                 System.out.println(ex.getMessage());
             }
             System.out.println("Thread3 work after sync with Thread6 by Semaphore");
+            
+            if(cr2.stopcount == 0) {
+            	System.out.println ("Tread3 goes die\n");
+            	break;
+            } 
         }
     }
 }

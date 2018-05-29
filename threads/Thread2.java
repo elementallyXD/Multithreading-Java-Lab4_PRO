@@ -25,7 +25,7 @@ public class Thread2 extends Thread{
     public void run(){
         
        while(true){
-           System.out.println("Thrad2 stands before CyclicBarrier and wait full sync with Thread1");
+           System.out.println("Thread2 stands before CyclicBarrier and wait full sync with Thread1");
             try {
                 brp.await();
             } catch (InterruptedException ex) {
@@ -33,9 +33,13 @@ public class Thread2 extends Thread{
             } catch (BrokenBarrierException ex) {
                 System.out.println(ex.getMessage());
             }
-            System.out.println("Thrad2 works after full sync with Thread1");
+            System.out.println("Thread2 works after full sync with Thread1");
             
-            CR.consume();             
+            CR.consume(); 
+            if(CR.stopcount == 0) {
+            	System.out.println ("Thread2 goes die\n");
+            	break;
+            } 
        }
     }
 }

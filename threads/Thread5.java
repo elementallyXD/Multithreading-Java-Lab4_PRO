@@ -17,6 +17,10 @@ public class Thread5 extends Thread{
         while(true){
           
         	CR.consume();
+        	if(CR.stopcount == 0) {
+            	System.out.println ("Thread5 goes die\n");
+            	break;
+            } 
         	
         }
     }

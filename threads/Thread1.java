@@ -12,12 +12,14 @@ public class Thread1 extends Thread{
     CommonRes1 CR;
     Semaphore sem1,sem2;
     CyclicBarrier brp;
+
     public Thread1(CommonRes1 CR, CyclicBarrier brp){
         super("Thread1");
         System.out.println("Thread1 started");
         this.CR = CR;
         this.brp = brp;
-	start();      
+	
+        start();      
     }    
     
     @Override
@@ -34,6 +36,11 @@ public class Thread1 extends Thread{
             System.out.println("Thrad1 works after full sync with Thread2");
             
             CR.produce();
+            
+            if(CR.stopcount == 0) {
+            	System.out.println ("P1 goes die\n");
+            	break;
+            } 
         }
     }
 }

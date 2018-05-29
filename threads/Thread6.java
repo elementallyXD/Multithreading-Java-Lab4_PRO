@@ -57,8 +57,14 @@ public class Thread6 extends Thread{
                                      "val6 = " + cr2.val_6 + "\n" +
                                      "val7 = " + cr2.val_7 + "\n" +
                                       "val8 = " + cr2.val_8);
+                cr2.stopcount--;
             mutex.unlock();
             System.out.println("Thread6 lock mutex and start to use with CR2");
+            
+            if(cr2.stopcount == 0) {
+            	System.out.println ("Thread6 goes die\n");
+            	break;
+            } 
         }
         
     }

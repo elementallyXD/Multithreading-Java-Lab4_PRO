@@ -10,4 +10,11 @@ public class CommonRes2 {
     public static double val_6;
     public static boolean val_7;
     public static boolean val_8;
+    
+ public int stopcount;
+    
+    public CommonRes2(int stopcount) {
+    	this.stopcount = stopcount;
+    }
 }
+

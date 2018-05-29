@@ -9,6 +9,8 @@ import threads.*;
 public class Main {
 
     public static void main(String[] args) {
+    	
+    	System.out.println("Program started!");
         Semaphore sem1 = new Semaphore(0, true);
         Semaphore sem2 = new Semaphore(0, true);
         
@@ -16,8 +18,8 @@ public class Main {
         
         CyclicBarrier brp = new CyclicBarrier(2);
         
-        CommonRes1 CR1 = new CommonRes1();
-        CommonRes2 CR2 = new CommonRes2();
+        CommonRes1 CR1 = new CommonRes1(4);
+        CommonRes2 CR2 = new CommonRes2(4);
        
         new Thread1(CR1,brp);
         new Thread2(CR1,brp);

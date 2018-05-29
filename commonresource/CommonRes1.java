@@ -7,45 +7,51 @@ public class CommonRes1 {
     public static final int maxSize = 10;
     public static final int minSize = 0;
     Stack stack = new Stack(maxSize, minSize); 
-    int ind = 0;
+    int ind = 0, full_times = 0;
     boolean IsEmpty = ind  == minSize;
     boolean IsFull = ind == maxSize;
+    public int stopcount;
+    
+    public CommonRes1(int stopcount) {
+    	this.stopcount = stopcount;
+    }
     	
     synchronized public void consume()
     {
         while (IsEmpty){
             try
-            {	wait(); 
+            {	
+            	wait(); 
             }
             catch (InterruptedException e)
             {	
-                
                 System.err.println("InterruptedException" + e.getMessage());
             }
         }
         
-       
             System.out.println("Element : " + stack.pop() + " - was consumed by " + Thread.currentThread().getName() + "\n");
             ind--;
         
         
         IsEmpty = ind == minSize;
-	IsFull = false;
-
+        IsFull = false;
+       
         notify();
     }
 	
     
 	synchronized public void produce ()
 	{
-            while (IsFull){
+		
+		while (IsFull){
                 try
                 {
                     wait();
-                    
+                    stopcount--;
                 }
                 catch (InterruptedException e)
-                {	System.out.println("InterruptedException");
+                {	
+                	System.out.println("InterruptedException");
                 }
             }
             stack.push(ind);
