@@ -25,6 +25,7 @@ public class Thread1 extends Thread{
     @Override
     public void run(){
         while(true){
+        	 
             System.out.println("Thrad1 stands before CyclicBarrier and wait full sync with Thread2");
             try {
                 brp.await();
@@ -35,12 +36,16 @@ public class Thread1 extends Thread{
             }
             System.out.println("Thrad1 works after full sync with Thread2");
             
+            if(CR.stopcount == 0) {
+            	
+             	System.out.println ("Thread1 goes die\n");
+             	break;
+             } 
+            
             CR.produce();
             
-            if(CR.stopcount == 0) {
-            	System.out.println ("P1 goes die\n");
-            	break;
-            } 
+           
         }
+        brp.reset();
     }
 }

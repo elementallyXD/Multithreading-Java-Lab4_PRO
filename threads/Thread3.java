@@ -30,6 +30,13 @@ public class Thread3 extends Thread{
     public void run(){
         int i = 87;
         while(true){
+        	if(cr2.stopcount == 0) {
+        		sem2.release();
+        		cb1.reset();
+        		System.out.println ("Tread3 goes die\n");
+            	break;
+            } 
+        	
             System.out.println("Thread3 wait sync with Thread6 by CyclicBarrier");
             try {
                 cb1.await();
@@ -69,10 +76,9 @@ public class Thread3 extends Thread{
             }
             System.out.println("Thread3 work after sync with Thread6 by Semaphore");
             
-            if(cr2.stopcount == 0) {
-            	System.out.println ("Tread3 goes die\n");
-            	break;
-            } 
+        	
         }
+        
+        
     }
 }

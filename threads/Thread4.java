@@ -20,12 +20,14 @@ public class Thread4 extends Thread{
     @Override
     public void run(){
         while(true){
-            
-            CR.produce();
-            if(CR.stopcount == 0) {
+        	
+        	if(CR.stopcount == 0) {
             	System.out.println ("Thread4 goes die\n");
             	break;
             } 
+            
+            CR.produce();
+            
         
         }
     }

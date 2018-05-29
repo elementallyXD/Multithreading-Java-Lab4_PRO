@@ -27,7 +27,14 @@ public class Thread6 extends Thread{
     @Override
     public void run(){
         while(true){
-            System.out.println("Thread6 wait sync with Thread3 with CyclicBarrier");
+        	 if(cr2.stopcount == 0) {
+        		 	sem1.release();
+        		 	cb1.reset();
+        		System.out.println ("Thread6 goes die\n");
+             	break;
+             } 
+        	
+        	System.out.println("Thread6 wait sync with Thread3 with CyclicBarrier");
             try {
                 cb1.await();
             } catch (InterruptedException ex) {
@@ -59,13 +66,10 @@ public class Thread6 extends Thread{
                                       "val8 = " + cr2.val_8);
                 cr2.stopcount--;
             mutex.unlock();
-            System.out.println("Thread6 lock mutex and start to use with CR2");
-            
-            if(cr2.stopcount == 0) {
-            	System.out.println ("Thread6 goes die\n");
-            	break;
-            } 
+            System.out.println("Thread6 unlock mutex");
         }
+    	sem1.release();
+	    cb1.reset();
         
     }
 }
